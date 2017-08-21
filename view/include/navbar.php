@@ -50,15 +50,19 @@ if (empty($_SESSION['language'])) {
 
                 <?php
                 if (User::canUpload()) {
-                    ?>
-                    <li class="hidden-xs">
-                        <a href="<?php echo $global['webSiteRootURL']; ?>upload" class="btn btn-default navbar-btn pull-left" data-toggle="tooltip" title="<?php echo __("Video and Audio Upload"); ?>" data-placement="bottom" ><span class="fa fa-upload"></span></a>
-
-                    </li>
-                    <li class="hidden-xs">
-                        <a href="<?php echo $global['webSiteRootURL']; ?>download" class="btn btn-default navbar-btn pull-left" data-toggle="tooltip" title="<?php echo __("Import Videos from Sites"); ?>" data-placement="bottom" ><span class="fa fa-download"></span></a>
-                    </li>
-                    <?php
+                    if (!empty($config->getEncoderURL())) {
+                        ?>
+                        <li>
+                            <a href="<?php echo $config->getEncoderURL(), "?webSiteRootURL=", urlencode($global['webSiteRootURL']), "&user=", urlencode(User::getUserName()), "&pass=", urlencode(User::getUserPass()); ?>" class="btn btn-default navbar-btn pull-left" data-toggle="tooltip" title="<?php echo __("Video and Audio Upload"); ?>" data-placement="bottom" ><span class="fa fa-upload"></span></a>
+                        </li>
+                        <?php
+                    } else {
+                        ?>
+                        <li>
+                            <a href="<?php echo $global['webSiteRootURL']; ?>siteConfigurations" class="btn btn-default navbar-btn pull-left" data-toggle="tooltip" title="<?php echo __("Configure an Encoder URL"); ?>" data-placement="bottom" ><span class="fa fa-cogs"></span></a>
+                        </li>
+                        <?php
+                    }
                 }
                 ?>
 
@@ -94,26 +98,13 @@ if (empty($_SESSION['language'])) {
         </li>
     </ul>
 
-    
+
     <div id="sidebar" class="list-group-item" style="display: none;">
         <div id="sideBarContainer">
-            <a href="<?php echo $global['webSiteRootURL']; ?>upload" class="btn btn-danger btn-block navbar-btn">
-                <span class="glyphicon glyphicon-upload" style="font-size: 1em;"></span> 
-                <?php echo __("Video and Audio Upload"); ?>
-            </a>
-            <a href="<?php echo $global['webSiteRootURL']; ?>download" class="btn btn-danger btn-block navbar-btn">
-                <span class="fa fa-youtube-play" style="font-size: 1em;"></span> 
-                <?php echo __("Import Videos from Sites"); ?><br>
-                <small><small><?php echo __("YouTube, DailyMotion, Vimeo and more"); ?></small></small>
-            </a>
             <ul class="nav navbar">
                 <?php
                 if (User::isLogged()) {
-                    ?>                
-
-                    <li>
-                        <hr>
-                    </li>
+                    ?>           
                     <li>
                         <div>
                             <a href="<?php echo $global['webSiteRootURL']; ?>logoff" class="btn btn-default btn-xs btn-block">

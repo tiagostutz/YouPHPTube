@@ -22,6 +22,8 @@
     RewriteRule    ^sendEmail$ objects/sendEmail.json.php    [NC,L]
     RewriteRule    ^captcha$ objects/getCaptcha.php    [NC,L]
     RewriteRule    ^monitor/(.+)$ objects/ServerMonitor/$1    [NC,L]
+    RewriteRule    ^videosList$ view/videosList.php    [NC,L]
+    RewriteRule    ^videosList/video/([A-Za-z0-9-_.]+)/page/([0-9]+)/?$ view/videosList.php?videoName=$1&page=$2    [NC,L]
 
     #for the category name
     RewriteRule    ^cat/([A-Za-z0-9-]+)/?$ view/?catName=$1    [NC,L]
@@ -102,6 +104,10 @@
     RewriteRule    ^subscribes.json$ objects/subscribes.json.php    [NC,L]
     RewriteRule    ^subscribe.json$ objects/subscribe.json.php    [NC,L]
     RewriteRule    ^notifySubscribers.json$ objects/notifySubscribers.json.php    [NC,L]
+
+
+    RewriteRule    ^youPHPTubeQueueEncoder.json$ objects/youPHPTubeQueueEncoder.json.php    [NC,L]
+    RewriteRule    ^youPHPTubeEncoder.json$ objects/youPHPTubeEncoder.json.php    [NC,L]
 
     #comment
     RewriteRule    ^saveComment$ objects/commentAddNew.json.php    [NC,L]

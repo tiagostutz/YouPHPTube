@@ -1,6 +1,6 @@
 <?php
 
-$installationVersion = "3.4";
+$installationVersion = "4.0";
 
 header('Content-Type: application/json');
 
@@ -106,7 +106,9 @@ if ($mysqli->query($sql) !== TRUE) {
     exit;
 }
 
-$sql = "INSERT INTO configurations (id, video_resolution, users_id, version, webSiteTitle, language, contactEmail,  created, modified) VALUES (1, '858:480', 1,'{$installationVersion}', '{$_POST['webSiteTitle']}', '{$_POST['mainLanguage']}', '{$_POST['contactEmail']}', now(), now())";
+$sql = "INSERT INTO configurations (id, video_resolution, users_id, version, webSiteTitle, language, contactEmail, encoderURL,  created, modified) "
+        . " VALUES "
+        . " (1, '858:480', 1,'{$installationVersion}', '{$_POST['webSiteTitle']}', '{$_POST['mainLanguage']}', '{$_POST['contactEmail']}', 'https://encoder.youphptube.com/', now(), now())";
 if ($mysqli->query($sql) !== TRUE) {
     $obj->error = "Error creating configuration: " . $mysqli->error;
     echo json_encode($obj);
@@ -138,7 +140,7 @@ require_once \$global['systemRootPath'].'objects/include_config.php';
 $fp = fopen($_POST['systemRootPath'] . "videos/configuration.php", "wb");
 fwrite($fp, $content);
 fclose($fp);
-
+/*
 //copy the 100% progress sample file to be used when the uploaded file is already encoded in the MP4 or WBM formats
 exec("cp {$_POST['systemRootPath']}install/FinishedProgressSample.* {$_POST['systemRootPath']}videos/", $output, $return_val);
 
@@ -147,6 +149,6 @@ if ($return_val !== 0) {
     echo json_encode($obj);
     exit;
 }
-
+*/
 $obj->success = true;
 echo json_encode($obj);

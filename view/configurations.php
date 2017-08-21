@@ -67,12 +67,6 @@ require_once $global['systemRootPath'] . 'objects/functions.php';
                                                 <?php echo __("Script Code"); ?>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link " href="#tabServerInfo" data-toggle="tab">
-                                                <span class="fa fa-info-circle"></span> 
-                                                <?php echo __("Server Info"); ?>
-                                            </a>
-                                        </li>
                                     </ul>
                                     <div class="tab-content clearfix">
                                         <div class="tab-pane" id="tabTheme">
@@ -207,74 +201,6 @@ require_once $global['systemRootPath'] . 'objects/functions.php';
                                             ?>
 
                                             <?php
-                                            if ($exifTool = isExifToo()) {
-                                                ?>
-                                                <div class="alert alert-success">
-                                                    <span class="glyphicon glyphicon-check"></span>
-                                                    <strong>Exiftool [<?php echo $exifTool; ?>] is Present</strong>
-                                                </div>                  
-                                                <?php
-                                            } else {
-                                                ?>
-                                                <div class="alert alert-danger">
-                                                    <span class="glyphicon glyphicon-unchecked"></span>
-                                                    <strong>Since YouPHPTube 2.1 we use exiftool to determine if an video is landscape or portrait</strong>
-                                                    <details>
-                                                        In order to install exiftool type the following command in the terminal:<br>
-                                                        <pre><code>sudo apt install libimage-exiftool-perl</code></pre>
-                                                    </details>
-                                                </div>                  
-                                                <?php
-                                            }
-                                            ?>
-                                            <?php
-                                            if ($ffmpeg = isFFMPEG()) {
-                                                ?>
-                                                <div class="alert alert-success">
-                                                    <span class="glyphicon glyphicon-check"></span>
-                                                    <strong>FFMPEG <?php echo $ffmpeg; ?> is Present</strong>
-                                                </div>                  
-                                                <?php
-                                            } else {
-                                                ?>
-                                                <div class="alert alert-danger">
-                                                    <span class="glyphicon glyphicon-unchecked"></span>
-                                                    <strong>FFmpeg is not enabled</strong>
-                                                    <details>
-                                                        FFmpeg has been removed from Ubuntu 14.04 and was replaced by Libav. This decision has been reversed so that FFmpeg is available now in Ubuntu 15.04 again, but there is still no official package for 14.04. In this tutorial, I will show you how to install FFmpeg from mc3man ppa. Add the mc3man ppa:
-                                                        <br>
-                                                        If you are not using Ubuntu 14.x go to step 2 
-                                                        <h2>Step 1</h2>
-                                                        <pre><code>sudo add-apt-repository ppa:mc3man/trusty-media</code></pre>
-                                                        <br>
-                                                        And confirm the following message by pressing &lt;enter&gt;:
-                                                        <br>
-                                                        <code>
-                                                            Also note that with apt-get a sudo apt-get dist-upgrade is needed for initial setup & with some package upgrades
-                                                            More info: https://launchpad.net/~mc3man/+archive/ubuntu/trusty-media
-                                                            Press [ENTER] to continue or ctrl-c to cancel adding it
-                                                        </code>
-                                                        <br>
-                                                        Update the package list.
-                                                        <br>
-                                                        <pre><code>
-                                                                                                        sudo apt-get update
-                                                                                                        sudo apt-get dist-upgrade
-                                                                                                    </code></pre>
-                                                        <br>
-                                                        Now FFmpeg is available to be installed with apt:
-                                                        <br>
-                                                        <h2>Step 2</h2>
-                                                        <pre><code>sudo apt-get install ffmpeg</code></pre>
-
-                                                    </details>
-                                                </div>                  
-                                                <?php
-                                            }
-                                            ?>
-
-
-                                            <?php
                                             if (checkVideosDir()) {
                                                 ?>
                                                 <div class="alert alert-success">
@@ -309,31 +235,6 @@ require_once $global['systemRootPath'] . 'objects/functions.php';
                                             $pathToPHPini = php_ini_loaded_file();
                                             if (empty($pathToPHPini)) {
                                                 $pathToPHPini = "/etc/php/7.0/cli/php.ini";
-                                            }
-                                            ?>
-
-
-                                            <?php
-                                            if (check_max_execution_time()) {
-                                                ?>
-                                                <div class="alert alert-success">
-                                                    <span class="glyphicon glyphicon-check"></span>
-                                                    <strong>Your max_execution_time is <?php echo ini_get('max_execution_time'); ?></strong>
-                                                </div>                  
-                                                <?php
-                                            } else {
-                                                ?>
-                                                <div class="alert alert-danger">
-                                                    <span class="glyphicon glyphicon-unchecked"></span>
-                                                    <strong>Your max_execution_time is <?php echo ini_get('max_execution_time'); ?>, it must be at least 7200</strong>
-
-                                                    <details>
-                                                        Edit the <code>php.ini</code> file 
-                                                        <br>
-                                                        <pre><code>sudo nano <?php echo $pathToPHPini; ?></code></pre>
-                                                    </details>
-                                                </div>                  
-                                                <?php
                                             }
                                             ?>
 
@@ -385,29 +286,6 @@ require_once $global['systemRootPath'] . 'objects/functions.php';
                                             }
                                             ?>
 
-                                            <?php
-                                            if (check_memory_limit()) {
-                                                ?>
-                                                <div class="alert alert-success">
-                                                    <span class="glyphicon glyphicon-check"></span>
-                                                    <strong>Your memory_limit is <?php echo ini_get('memory_limit'); ?></strong>
-                                                </div>                  
-                                                <?php
-                                            } else {
-                                                ?>
-                                                <div class="alert alert-danger">
-                                                    <span class="glyphicon glyphicon-unchecked"></span>
-                                                    <strong>Your memory_limit is <?php echo ini_get('memory_limit'); ?>, it must be at least 512M</strong>
-
-                                                    <details>
-                                                        Edit the <code>php.ini</code> file 
-                                                        <br>
-                                                        <pre><code>sudo nano <?php echo $pathToPHPini; ?></code></pre>
-                                                    </details>
-                                                </div>                   
-                                                <?php
-                                            }
-                                            ?>
                                         </div>
                                         <div class="tab-pane  active" id="tabRegular">
                                             <fieldset>
@@ -586,88 +464,14 @@ require_once $global['systemRootPath'] . 'objects/functions.php';
                                                     <legend><?php echo __("Advanced configuration"); ?></legend>
 
                                                     <div class="form-group">
-                                                        <label class="col-md-4 control-label"><?php echo __("Video Resolution"); ?></label>  
-                                                        <div class="col-md-8 inputGroupContainer">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon"><i class="glyphicon glyphicon-film"></i></span>
-                                                                <input aria-describedby="resolutionHelp"   id="inputVideoResolution" placeholder="<?php echo __("Video Resolution"); ?>" class="form-control"  type="text" value="<?php echo $config->getVideo_resolution(); ?>" >                                            
-                                                            </div>
-                                                            <small id="resolutionHelp" class="form-text text-muted"><?php echo __("Use one of the recommended resolutions"); ?></small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("Exiftool"); ?></label>  
+                                                        <label class="col-md-2"><?php echo __("Encoder URL"); ?></label>  
                                                         <div class="col-md-10">
-                                                            <input id="exiftool" class="form-control"  type="text" value="<?php echo $config->getExiftool(); ?>" >       
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("FFPROBE Duration"); ?></label>  
-                                                        <div class="col-md-10">
-                                                            <input id="ffprobeDuration" class="form-control"  type="text" value="<?php echo $config->getFfprobeDuration(); ?>" >       
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("FFMPEG Image"); ?></label>  
-                                                        <div class="col-md-10">
-                                                            <input id="ffmpegImage" class="form-control"  type="text" value="<?php echo $config->getFfmpegImage(); ?>" >  
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("FFMPEG MP4"); ?></label>  
-                                                        <div class="col-md-10">
-                                                            <input id="ffmpegMp4" class="form-control"  type="text" value="<?php echo $config->getFfmpegMp4(); ?>" > 
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("FFMPEG MP4 Portrait"); ?></label>  
-                                                        <div class="col-md-10">
-                                                            <input id="ffmpegMp4Portrait" class="form-control"  type="text" value="<?php echo $config->getFfmpegMp4Portrait(); ?>" > 
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("FFMPEG Webm"); ?></label>  
-                                                        <div class="col-md-10">
-                                                            <input id="ffmpegWebm" class="form-control"  type="text" value="<?php echo $config->getFfmpegWebm(); ?>" >   
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("FFMPEG Webm Portrait"); ?></label>  
-                                                        <div class="col-md-10">
-                                                            <input id="ffmpegWebmPortrait" class="form-control"  type="text" value="<?php echo $config->getFfmpegWebmPortrait(); ?>" >   
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("FFMPEG MP3"); ?></label>  
-                                                        <div class="col-md-10">
-                                                            <input id="ffmpegMp3" class="form-control"  type="text" value="<?php echo $config->getFfmpegMp3(); ?>" >  
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("FFMPEG MP3 Spectrum"); ?></label>  
-                                                        <div class="col-md-10">
-                                                            <input id="ffmpegSpectrum" class="form-control"  type="text" value="<?php echo $config->getFfmpegSpectrum(); ?>" >  
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("FFMPEG Ogg"); ?></label>  
-                                                        <div class="col-md-10">
-                                                            <input id="ffmpegOgg" class="form-control"  type="text" value="<?php echo $config->getFfmpegOgg(); ?>" >  
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("Youtube-dl"); ?></label>  
-                                                        <div class="col-md-10">
-                                                            <input id="youtubeDl" class="form-control"  type="text" value="<?php echo $config->getYoutubedl(); ?>" >     
+                                                            <input id="encoder_url" aria-describedby="encoder_urlHelp" class="form-control"  type="url" value="<?php echo $config->getEncoderURL(); ?>" > 
+                                                            <small id="encoder_urlHelp" class="form-text text-muted">
+                                                                <?php echo __("You need to set up an encoder server"); ?><br>
+                                                                <?php echo __("You can use our public encoder on"); ?>: https://encoder.youphptube.com/ or 
+                                                                <a href="https://github.com/DanielnetoDotCom/YouPHPTube-Encoder" class="btn btn-default btn-xs" target="_blank"><?php echo __("For faster encode, download your own encoder"); ?></a>
+                                                            </small>
                                                         </div>
                                                     </div>
 
@@ -678,38 +482,6 @@ require_once $global['systemRootPath'] . 'objects/functions.php';
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("Encode video in MP4 Format"); ?></label>  
-                                                        <div class="col-md-10">
-                                                            <input data-toggle="toggle" type="checkbox" name="encode_mp4" id="encode_mp4" value="1" <?php
-                                                            if (!empty($config->getEncode_mp4())) {
-                                                                echo "checked";
-                                                            }
-                                                            ?>>    
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("Encode video in WEBM Format"); ?></label>  
-                                                        <div class="col-md-10">
-                                                            <input data-toggle="toggle" type="checkbox" name="encode_webm" id="encode_webm" value="1" <?php
-                                                            if (!empty($config->getEncode_webm())) {
-                                                                echo "checked";
-                                                            }
-                                                            ?>>    
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-2"><?php echo __("Encode MP3 file Spectrum"); ?></label>  
-                                                        <div class="col-md-10">
-                                                            <input data-toggle="toggle" type="checkbox" name="encode_mp3spectrum" id="encode_mp3spectrum" value="1" <?php
-                                                            if (!empty($config->getEncode_mp3spectrum())) {
-                                                                echo "checked";
-                                                            }
-                                                            ?>>    
-                                                        </div>
-                                                    </div>
 
                                                     <div class="form-group">
                                                         <label class="col-md-2"><?php echo __("Disable YouPHPTube Google Analytics"); ?></label>  
@@ -816,120 +588,6 @@ require_once $global['systemRootPath'] . 'objects/functions.php';
 
                                             </fieldset>
                                         </div>
-                                        <div class="tab-pane" id="tabServerInfo">
-                                            <link rel="stylesheet" href="<?php echo $global['webSiteRootURL']; ?>monitor/gauge/css/asPieProgress.css">
-                                            <style>
-                                                .pie_progress {
-                                                    width: 160px;
-                                                    margin: 10px auto;
-                                                }
-                                                @media all and (max-width: 768px) {
-                                                    .pie_progress {
-                                                        width: 80%;
-                                                        max-width: 300px;
-                                                    }
-                                                }
-                                                .serverInfo pre{
-                                                    height: 250px;
-                                                    overflow: scroll;
-                                                }
-                                                .serverInfo .title{
-                                                    height: 50px;
-                                                }
-                                            </style>
-                                            <div class="row serverInfo">
-                                                <div class="col-xs-12 col-sm-12 col-lg-4" id="cpuDiv">                        
-                                                    <div class="pie_progress_cpu" role="progressbar" data-goal="33">
-                                                        <div class="pie_progress__number">0%</div>
-                                                        <div class="pie_progress__label">CPU</div>
-                                                    </div>
-                                                    <h1>Cpu</h1>
-                                                    <div class='title'></div>
-                                                    <pre></pre>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-lg-4" id="memDiv">
-                                                    <div class="pie_progress_mem" role="progressbar" data-goal="33">
-                                                        <div class="pie_progress__number">0%</div>
-                                                        <div class="pie_progress__label">Memory</div>
-                                                    </div>
-                                                    <h1>Memory</h1>
-                                                    <div class='title'></div>
-                                                    <pre></pre>
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-lg-4" id="diskDiv">
-                                                    <div class="pie_progress_disk" role="progressbar" data-goal="33">
-                                                        <div class="pie_progress__number">0%</div>
-                                                        <div class="pie_progress__label">Disk</div>
-                                                    </div>
-                                                    <h1>Disk</h1>
-                                                    <div class='title'></div>
-                                                    <pre></pre>
-                                                </div>
-                                            </div>
-                                            <script type="text/javascript" src="<?php echo $global['webSiteRootURL']; ?>monitor/gauge/jquery-asPieProgress.js"></script>
-                                            <script type="text/javascript">
-                                                $(document).ready(function () {
-                                                    // Example with grater loading time - loads longer
-                                                    setTimeout(function () {
-                                                        $('.pie_progress_cpu').asPieProgress({});
-                                                        getCpu();
-
-                                                    }, 1000);
-                                                    setTimeout(function () {
-                                                        $('.pie_progress_mem').asPieProgress({});
-                                                        getMem();
-
-                                                    }, 2000);
-                                                    setTimeout(function () {
-                                                        $('.pie_progress_disk').asPieProgress({});
-                                                        getDisk();
-                                                    }, 3000);
-                                                });
-
-                                                function getCpu() {
-                                                    $.ajax({
-                                                        url: '<?php echo $global['webSiteRootURL']; ?>monitor/cpu.json.php',
-                                                        success: function (response) {
-                                                            update('cpu', response);
-                                                            setTimeout(function () {
-                                                                getCpu();
-                                                            }, 2000);
-                                                        }
-                                                    });
-                                                }
-
-                                                function getMem() {
-                                                    $.ajax({
-                                                        url: '<?php echo $global['webSiteRootURL']; ?>monitor/memory.json.php',
-                                                        success: function (response) {
-                                                            update('mem', response);
-
-                                                            setTimeout(function () {
-                                                                getMem();
-                                                            }, 10000);
-                                                        }
-                                                    });
-                                                }
-
-                                                function getDisk() {
-                                                    $.ajax({
-                                                        url: '<?php echo $global['webSiteRootURL']; ?>monitor/disk.json.php',
-                                                        success: function (response) {
-                                                            update('disk', response);
-                                                            setTimeout(function () {
-                                                                getDisk();
-                                                            }, 30000);
-                                                        }
-                                                    });
-                                                }
-
-                                                function update(name, response) {
-                                                    $('.pie_progress_' + name).asPieProgress('go', response.percent);
-                                                    $("#" + name + "Div div.title").text(response.title);
-                                                    $("#" + name + "Div pre").text(response.output.join('\n'));
-                                                }
-                                            </script>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- Button -->
@@ -945,37 +603,6 @@ require_once $global['systemRootPath'] . 'objects/functions.php';
 
                         </form>
 
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-lg-3">
-                        <ul class="list-group">
-                            <li class="list-group-item active">
-                                <?php echo __("Recommended resolutions"); ?>
-                            </li>
-                            <li class="list-group-item justify-content-between list-group-item-action">
-                                352:240
-                                <span class="badge badge-default badge-pill">(240p)(SD)</span>
-                            </li>
-                            <li class="list-group-item justify-content-between list-group-item-action">
-                                640:360 
-                                <span class="badge badge-default badge-pill">(360p)</span>
-                            </li>
-                            <li class="list-group-item justify-content-between list-group-item-action">
-                                858:480 
-                                <span class="badge badge-default badge-pill">(480p)</span>
-                            </li>
-                            <li class="list-group-item justify-content-between list-group-item-action">
-                                1280:720 
-                                <span class="badge badge-default badge-pill">(720p)(Half HD)</span>
-                            </li>
-                            <li class="list-group-item justify-content-between list-group-item-action">
-                                1920:1080 
-                                <span class="badge badge-default badge-pill">(1080p)(Full HD)</span>
-                            </li>
-                            <li class="list-group-item justify-content-between list-group-item-action">
-                                3860:2160 
-                                <span class="badge badge-default badge-pill">(2160p)(Ultra-HD)(4K)</span>
-                            </li>
-                        </ul>
                     </div>
                 </div>
                 <script>
@@ -1097,28 +724,11 @@ require_once $global['systemRootPath'] . 'objects/functions.php';
                                             "authGoogle_enabled": $('#authGoogle_enabled').val(),
                                             "authGoogle_id": $('#authGoogle_id').val(),
                                             "authGoogle_key": $('#authGoogle_key').val(),
-                                            "ffprobeDuration": $('#ffprobeDuration').val(),
-                                            "ffmpegImage": $('#ffmpegImage').val(),
-                                            "ffmpegMp4": $('#ffmpegMp4').val(),
-                                            "ffmpegWebm": $('#ffmpegWebm').val(),
-                                            "ffmpegMp4Portrait": $('#ffmpegMp4Portrait').val(),
-                                            "ffmpegWebmPortrait": $('#ffmpegWebmPortrait').val(),
-                                            "ffmpegMp3": $('#ffmpegMp3').val(),
-                                            "ffmpegOgg": $('#ffmpegOgg').val(),
-                                            "youtubeDl": $('#youtubeDl').val(),
-                                            "youtubeDlPath": $('#youtubeDlPath').val(),
-                                            "exiftoolPath": $('#exiftoolPath').val(),
-                                            "exiftool": $('#exiftool').val(),
-                                            "ffmpegPath": $('#ffmpegPath').val(),
                                             "head": $('#head').val(),
                                             "adsense": $('#adsense').val(),
                                             "mode": $('#mode').val(),
                                             "disable_analytics": $('#disable_analytics').prop("checked"),
                                             "session_timeout": $('#session_timeout').val(),
-                                            "encode_mp4": $('#encode_mp4').prop("checked"),
-                                            "encode_webm": $('#encode_webm').prop("checked"),
-                                            "encode_mp3spectrum": $('#encode_mp3spectrum').prop("checked"),
-                                            "ffmpegSpectrum": $('#ffmpegSpectrum').val(),
                                             "autoplay": $('#autoplay').prop("checked"),
                                             "theme": theme,
                                             "smtp": $('#enableSmtp').prop("checked"),
@@ -1128,6 +738,7 @@ require_once $global['systemRootPath'] . 'objects/functions.php';
                                             "smtpUsername": $('#smtpUsername').val(),
                                             "smtpPassword": $('#smtpPassword').val(),
                                             "smtpPort": $('#smtpPort').val(),
+                                            "encoder_url": $('#encoder_url').val(),
 
                                         },
                                         type: 'post',
